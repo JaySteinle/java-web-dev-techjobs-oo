@@ -22,7 +22,7 @@ public class Job {
         nextId++;
     }
 
-    public Job(String value) {
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
         this();
         this.name = name;
         this.employer = employer;
@@ -31,6 +31,7 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+//    public Job jobAllFields = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
