@@ -14,13 +14,17 @@ public class JobTest {
     Job job_0;
     Job job_1;
     Job job_2;
+    Job job_3;
     Job newJob;
+    Job jobEmptyFields;
 
     @Before
-    public void createJobObject() {
+    public void createJobObjects() {
         job_0 = new Job("Default Name", new Employer("Default Employer"), new Location("Default Location"), new PositionType("Default Position Type"), new CoreCompetency("Default Core Competency"));
         job_1 = new Job("A", new Employer("B"), new Location("C"), new PositionType("D"), new CoreCompetency("E"));
         job_2 = new Job("A", new Employer("B"), new Location("C"), new PositionType("D"), new CoreCompetency("E"));
+        job_3 = new Job("Product tester", new Employer(""), new Location(""), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+        jobEmptyFields = new Job("", new Employer(""), new Location(""), new PositionType(""), new CoreCompetency(""));
         newJob = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
     }
 
@@ -30,25 +34,14 @@ public class JobTest {
     }
 
     @Test
-    public void checkIds() {
-//        assertEquals(1, job_1.getId(), 0);
-//        assertEquals(2, job_2.getId(), 0);
-//        assertEquals(job_1.getId() + 1, job_2.getId(), 0);
+    public void checkIdsIncrementing() {
         assertEquals(job_1.getId() + 1, job_2.getId());
     }
 
     @Test
-    public void toString(Job jobAllFields) {
-        jobAllFields.toString();
-//        assertEquals(1, 1);
-
-//        System.out.println("\n");
-//        System.out.println(job_0.getId());
-//        System.out.println(job_0.getEmployer());
-//        System.out.println(job_0.getLocation());
-//        System.out.println(job_0.getPositionType());
-//        System.out.println(job_0.getCoreCompetency());
-//        System.out.println("\n");
+    public void testForBlankSpacesAtBeginningAndEnd() {
+        assertEquals(0, newJob.toString().indexOf('\n'));
+        assertTrue(newJob.toString().endsWith("\n"));
     }
 
 
@@ -70,9 +63,25 @@ public class JobTest {
 
     //TODO   Test for equality
     @Test
-    public void testJobsForEquality(){
-//        assertNotEquals(job_1.getId(), (job_2.getId()));
+    public void testJobsForInequality(){
         assertFalse(job_1.getId() == job_2.getId());
+    }
+
+    @Test
+    public void checkForLabels(){
+        assertTrue(job_1.toString().contains("\nName"));
+        assertTrue(job_1.toString().contains("\nEmployer"));
+        assertTrue(job_1.toString().contains("\nLocation"));
+        assertTrue(job_1.toString().contains("\nPosition Type"));
+        assertTrue(job_1.toString().contains("\nCore Competency"));
+    }
+
+    @Test
+    public void checkForEmptyString(){
+        assertEquals("Data not available", jobEmptyFields.getCoreCompetency().toString());
+        assertEquals("Data not available", jobEmptyFields.getEmployer().toString());
+        assertEquals("Data not available", jobEmptyFields.getLocation().toString());
+        assertEquals("Data not available", jobEmptyFields.getPositionType().toString());
     }
 
 }

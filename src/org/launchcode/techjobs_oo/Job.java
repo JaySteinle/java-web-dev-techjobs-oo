@@ -30,16 +30,16 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-    public Job jobAllFields = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
     @Override
     public String toString(){
-        System.out.println(jobAllFields.getId());
-        System.out.println(jobAllFields.getEmployer());
-        System.out.println(jobAllFields.getLocation());
-        System.out.println(jobAllFields.getPositionType());
-        System.out.println(jobAllFields.getCoreCompetency());
-        return null;
+        return "\n" +
+            "ID: " + id + "\n" +
+            "Name: " + name + "\n" +
+            "Employer: " + employer + "\n" +
+            "Location: " + location + "\n" +
+            "Position Type: " + positionType+ "\n" +
+            "Core Competency: " + coreCompetency + "\n";
     }
 
     // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
